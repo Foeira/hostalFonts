@@ -1,0 +1,85 @@
+
+# get all rooms
+###
+GET http://localhost:5000/api/rooms
+
+
+# create room
+###
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+
+{
+    "name": "test room 003",
+    "price": 100,
+    "desc":"some description",
+    "roomNumbers":[{
+        "number": 103,
+        "unavailableDates": ["2025-11-10","2025-11-11","2025-11-12"]
+    }]
+}
+
+# get single room
+###
+GET http://localhost:5000/api/rooms/69127fc16396e1435718483f
+
+
+#update room
+###
+PUT http://localhost:5000/api/rooms/69127fc16396e1435718483f
+Content-Type: application/json
+
+{
+    "name": "updated name",
+    "price": 120
+}
+
+
+#delete room
+###
+DELETE http://localhost:5000/api/rooms/69127fc16396e1435718483f
+
+
+
+
+
+#get bookings
+
+###
+GET http://localhost:5000/api/bookings
+
+
+# Get single booking
+###
+GET http://localhost:5000/api/bookings/69138d4c2db3c7cf77d47055
+
+
+#create booking
+
+###
+POST http://localhost:5000/api/bookings
+Content-Type: application/json
+
+{
+    "roomId": "691280182c5ab7b249b9a6f1",
+    "name": "carlos F",
+    "email": "algo@email.com",
+    "checkInDate": "2025-11-12",
+    "checkOutDate": "2025-11-15"
+}
+
+
+# update booking
+###
+PUT http://localhost:5000/api/bookings/69138d4c2db3c7cf77d47055
+Content-Type: application/json
+
+{
+    "name": "Ofelix H",
+    "email": "updated@email.com"
+}
+
+
+#delete booking
+###
+DELETE http://localhost:5000/api/bookings/69138d4c2db3c7cf77d47055
