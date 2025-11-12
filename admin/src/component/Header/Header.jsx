@@ -14,6 +14,7 @@ const Header = () => {
   const handleLogout = async() => {
     dispatch(logoutUser())
     dispatch(reset())
+    //Error al momento de refrescar el dahsboard
     
 
   }
