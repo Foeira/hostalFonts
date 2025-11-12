@@ -1,12 +1,12 @@
 const { Router } = require("express")
 const {getBookings, getBooking, createBooking, updateBooking, deleteBooking} = require("../controllers/bookingController")
+const {auth} = require("../midleware/authMiddleware")
+const router = Router();
 
-router = Router();
-
-router.get("/", getBookings)
-router.get("/:id", getBooking)
+router.get("/", auth, getBookings)
+router.get("/:id", auth, getBooking)
 router.post("/", createBooking)
-router.put("/:id", updateBooking)
-router.delete("/:id", deleteBooking)
+router.put("/:id", auth, updateBooking)
+router.delete("/:id", auth, deleteBooking)
 
 module.exports = router

@@ -83,3 +83,40 @@ Content-Type: application/json
 #delete booking
 ###
 DELETE http://localhost:5000/api/bookings/69138d4c2db3c7cf77d47055
+
+
+# Get users
+###
+GET http://localhost:5000/api/users
+
+
+# create user
+###
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "name":"Pris F",
+    "email":"Pfont@gmail.com",
+    "password":"123456"
+   
+}
+
+
+# login user
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email":"Pfont@gmail.com",
+    "password": "123456"
+}
+
+# logout
+###
+GET http://localhost:5000/api/users/logout
+
+#check auth
+###
+GET http://localhost:5000/auth
