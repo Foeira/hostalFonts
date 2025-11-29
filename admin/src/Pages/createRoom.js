@@ -48,9 +48,10 @@ const CreateRoom = () => {
             unavailableDates: []
         }
     })
-
+      //upload images to cloudinary
         let list = []
-        list = await Promise.all(Object.values(files).map(async(file)=>{
+        list = await Promise.all(Object.values(files).map(
+          async(file) => {
            const url = await uploadImage(file) 
            return url
         })

@@ -8,8 +8,32 @@ const initialState = {
     message:""
 }
 
+//create room
+export const createRoom = createAsyncThunk("room/create", async(roomData, thunkAPI) => {
+    try {
+        const res = await fetch("/api/rooms", {
+            headers: {
+                "Content-Type": "application/json"
+
+            },
+            method: "POST",
+            body: JSON.stringify(roomData)
+        })
+        if(!res.ok){
+            const error = await res.json()
+            return thunkAPI.rejectWithValue(error)
+        }
+
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.log(error.message)
+        return thunkAPI.rejectWithValue(error.message)
+    }
+})
+
 export const roomSlice = createSlice({
-    name:roomSlice,
+    name:"room",
     initialState,
     reducers: {
         reset: (state) => {
@@ -24,5 +48,5 @@ export const roomSlice = createSlice({
     }
 })
 
-export const {reset} = roomSlice.actions
+export const { reset } = roomSlice.actions
 export default roomSlice.reducer
