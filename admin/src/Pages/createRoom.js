@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { uploadImage } from '../helper/utils'
 
 const CreateRoom = () => {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ const CreateRoom = () => {
     name:"",
     price:"",
     desc:"",
-    roomNumbers:[]
+    roomNumbers:"401,101,102,103"
   })
 
   const { name, price, desc, roomNumbers} = formData;
@@ -35,10 +36,37 @@ const CreateRoom = () => {
     setFiles(e.target.files)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    if(!name || !price || !roomNumbers){
+        return
+    }
 
-    //let dataToSubmit = {name, price, desc, roomNumbers, img}
+    const roomArray = roomNumbers.split(",").map(item => {
+        return{
+            number: parseInt(item),
+            unavailableDates: []
+        }
+    })
+
+        let list = []
+        list = await Promise.all(Object.values(files).map(async(file)=>{
+           const url = await uploadImage(file) 
+           return url
+        })
+    )
+
+    const dataToSubmit = {
+        name,
+        price,
+        desc,
+        roomNumbers: roomArray,
+        img: list,
+    }
+
+    //dispatch createRoom function
+    console.log(dataToSubmit )
+   
   }
   return (
     <div className='container'>
@@ -83,6 +111,7 @@ const CreateRoom = () => {
                  name='roomNumbers' 
                  onChange={handleChange} 
                  value={roomNumbers}
+                 placeholder='101,102,103'
                  ></input>
             </div>
             <div className='input-group'>

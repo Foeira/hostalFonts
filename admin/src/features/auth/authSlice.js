@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk("auth/login", async(userData, thunkAPI
     })
 
     export const logoutUser = createAsyncThunk("auth/logout",
-         async (_, thunkAPI) =>{
+         async (_, thunkAPI) => {
         try {
             const res = await fetch("/api/users/logout")
             if(!res.ok){
@@ -124,7 +124,7 @@ export const loginUser = createAsyncThunk("auth/login", async(userData, thunkAPI
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading=false;
