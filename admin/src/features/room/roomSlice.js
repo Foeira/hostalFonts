@@ -9,7 +9,8 @@ const initialState = {
 }
 
 //create room
-export const createRoom = createAsyncThunk("room/create", async(roomData, thunkAPI) => {
+export const createRoom = createAsyncThunk(
+    "room/create", async(roomData, thunkAPI) => {
     try {
         const res = await fetch("/api/rooms", {
             headers: {
@@ -45,6 +46,20 @@ export const roomSlice = createSlice({
     },
     extraReducers: builder => {
         //cases
+     builder
+     .addCase(createRoom.pending, (state) => {
+        state.isLoading = true
+     })
+     .addCase(createRoom.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.room = action.payload
+     })
+     .addCase(createRoom.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+     })
     }
 })
 

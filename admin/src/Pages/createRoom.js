@@ -1,11 +1,17 @@
 import {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { uploadImage } from '../helper/utils'
+import { createRoom, reset } from '../features/room/roomSlice'
+
 
 const CreateRoom = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
   const {user} = useSelector((state) => state.auth)
+  const {isSucces} = useSelector((state) => state.room)
   const [files, setFiles] = useState()
   const [ formData, setFormData ] = useState({
     name:"",
@@ -22,6 +28,14 @@ const CreateRoom = () => {
 
     }
   }, [user])
+
+
+  useEffect(()=>{
+    if(isSucces){
+      dispatch(reset())
+      navigate("/dashboard")
+    }
+  },[isSucces])
 
   const handleChange = (e) =>{
     setFormData(prevState => ({
@@ -66,7 +80,7 @@ const CreateRoom = () => {
     }
 
     //dispatch createRoom function
-    console.log(dataToSubmit )
+    dispatch(dataToSubmit)
    
   }
   return (
