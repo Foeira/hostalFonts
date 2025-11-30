@@ -76,11 +76,11 @@ const CreateRoom = () => {
         price,
         desc,
         roomNumbers: roomArray,
-        img: list,
+        //img: list,
     }
 
     //dispatch createRoom function
-    dispatch(dataToSubmit)
+    dispatch(createRoom(dataToSubmit))
    
   }
   return (

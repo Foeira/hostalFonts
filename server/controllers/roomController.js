@@ -27,8 +27,9 @@ try {
         res.status(400);
         throw new Error("There was a problem creating")
     }
+    const rooms = await Room.find()
 
-    return res.status(201).json(room)
+    return res.status(201).json(rooms)
       
 } catch (error) {
     next(error)

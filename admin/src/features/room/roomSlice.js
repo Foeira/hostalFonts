@@ -31,7 +31,27 @@ export const createRoom = createAsyncThunk(
         console.log(error.message)
         return thunkAPI.rejectWithValue(error.message)
     }
-})
+}
+)
+//get all rooms
+
+export const getRooms = createAsyncThunk("room/getall", async(__,
+    thunkAPI) =>{
+        try {
+            const res = await fetch("/api/rooms")
+            if(!res.ok){
+                const error = await res.json()
+                return thunkAPI.rejectWithValue(error)
+            }
+            const data = await res.json()
+            return data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message)
+            
+        }
+    })
+
+
 
 export const roomSlice = createSlice({
     name:"room",
@@ -56,6 +76,19 @@ export const roomSlice = createSlice({
         state.room = action.payload
      })
      .addCase(createRoom.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+     })
+     .addCase(getRooms.pending, (state) => {
+        state.isLoading = true
+     })
+     .addCase(getRooms.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.rooms = action.payload
+     })
+     .addCase(getRooms.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
