@@ -7,6 +7,7 @@ import Header from './component/Header/Header'
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import CreateRoom from "./Pages/createRoom"
 import Rooms from "./Pages/Rooms/Rooms"
+import Room from "./Pages/Room/Room"
 
 
 const App = () => {
@@ -21,6 +22,8 @@ const App = () => {
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/rooms' element={<Rooms/>}></Route>
         <Route path='/rooms/create' element={<CreateRoom/>} />
+        <Route path='/rooms/all/:id' element={<Room/>} />
+
        
       </Routes>
     </Router>
