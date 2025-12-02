@@ -1,4 +1,4 @@
-
+import "./rooms.styles.scss"
 import { getRooms } from "../../features/room/roomSlice"
 import { useEffect } from "react"
 import {useDispatch, useSelector} from "react-redux"
@@ -22,8 +22,10 @@ const Rooms = () => {
     }
   return (
     <div>
-     <h1 className="heading center">Rooms</h1>
-     {rooms.length > 0 ? <RoomList data={rooms} /> : null}
+      <div className="container">
+        <h1 className="heading center">Rooms</h1>
+        {rooms.length > 0 ? <RoomList data={rooms} /> : null}
+      </div>
     </div>
   )
 }

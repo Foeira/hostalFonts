@@ -1,3 +1,4 @@
+import "./room.styles.scss"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
@@ -27,14 +28,19 @@ const Room = () => {
 
     },[])
   return (
-    <div>
-      <h1 className='heading center'>Room</h1>
-      {room ? <div> 
-        <p>{room.name}</p>
-        <p>{room.price}</p>
-        <p>{room.desc}</p>
-
-      </div> : null}
+    <div className="container">
+    <div id="room">
+      {room ? (
+        <div> 
+            <h1 className='heading center'>{room.name}</h1>
+            <div className="img-wrapper">
+            {/*<img src={room.img[0]} alt=""/>*/}
+            </div>
+                <p>{room.desc}</p>
+                <h2>${room.price.toFixed(2)} MXN</h2>
+      </div>
+      ) : null}
+    </div>
     </div>
   )
 }
